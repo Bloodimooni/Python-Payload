@@ -14,15 +14,10 @@ def reliable_recv():
             continue
 
 def download_file(file):
-    print("Downloading file %s" % file)
-    print("Starting file download from remote host")
     with open(file, "wb") as f:
-        print("set the timeout to 1")
         s.settimeout(1)
-        print("Trying to recv 1024 bytes")
-        chunk = target.recv(1024)
-        while chunk:
-            print("entered while loop")
+        chunk = s.recv(1024)
+        while True:
             f.write(chunk)
             try:
                 chunk = s.recv(1024)
@@ -71,5 +66,5 @@ def connection(your_ip):
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-your_ip = input("server ip:\n")
+your_ip = "192.168.178.132" #input("server ip:\n")
 connection(your_ip)

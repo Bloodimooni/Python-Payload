@@ -26,8 +26,7 @@ def target_communication():
             cp(result, "blue")
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host = socket.gethostbyname(socket.gethostname())
-sock.bind((host, 5555))
+sock.bind(("192.168.178.132", 5555))
 cp("[~] Listening for incomming connections:","yellow")
 
 sock.listen(5)

